@@ -17,11 +17,18 @@
 // con difficoltà 2 => tra 1 e 50
 
 
-numeriRandom = [];
-numeriUtente = [];
+var numeriRandom = [];
+var numeriUtente = [];
+var possibilita = 100 - 16;
+var punteggio = 0;
+
+function generaRandom(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 
 while (numeriRandom.length < 16) {
-  var numero = generaRandom(1, 50);
+  var numero = generaRandom(1, 100);
   if (numeriRandom.includes(numero) == false) {
     numeriRandom.push(numero);
   }
@@ -29,30 +36,20 @@ while (numeriRandom.length < 16) {
 
 console.log(numeriRandom);
 
-
-
-var sentinella = true;
-
-while (numeriUtente.length < 5 && sentinella == true) {
-  var n = parseInt(prompt("inserisci i 16 numeri"));
-  if (numeriUtente.includes(n) == false) {
-    numeriUtente.push(n);
+for (var i = 0; i <= possibilita; i++) {
+  puntataUtente = parseInt(prompt("inserisci numero"));
+  if (numeriRandom.includes(puntataUtente) == true) {
+    console.log("Bomba colpita, game over");
+    break;
+  } else if (numeriUtente.includes(puntataUtente) == true) {
+    console.log("Numero già usato, riprova");
   } else {
-    alert('hai perso');
-    sentinella = false;
+    numeriUtente.push(puntataUtente);
   }
+  punteggio++;
 }
 
-console.log(numeriUtente);
-
-
-// FUNZIONE
-
-function generaRandom(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-
+console.log("il tuo punteggio è : ", punteggio);
 
 
 
